@@ -8,7 +8,7 @@ spec:
     namespace: argocd
   source:
     path: core
-    repoURL: git@github.com:groot314/kubesCore.git
+    repoURL: https://github.com/groot314/kubesCore.git
     targetRevision: HEAD
   sources: []
   project: default
