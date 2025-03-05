@@ -4,10 +4,12 @@ metadata:
   name: core
 spec:
   destination:
-    name: in-cluser
+    name: in-cluster
     namespace: argocd
   source:
     path: core
-    repoURL: ''
+    repoURL: git@github.com:groot314/kubesCore.git
     targetRevision: HEAD
+  sources: []
   project: default
+
