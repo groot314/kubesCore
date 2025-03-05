@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core
+spec:
+  destination:
+    name: in-cluser
+    namespace: argocd
+  source:
+    path: core
+    repoURL: ''
+    targetRevision: HEAD
+  project: default
