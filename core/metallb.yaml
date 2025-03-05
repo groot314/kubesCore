@@ -1,19 +1,20 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: metallb-system
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: metallb
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    name: in-cluster
-    namespace: metallb-system
+  project: default
   source:
     repoURL: https://metallb.github.io/metallb
-    targetRevision: 0.14.9
     chart: metallb
-  project: default
-
+    targetRevision: 0.14.9
+  destination:
+    namespace: metallb-system
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
