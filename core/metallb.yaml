@@ -12,12 +12,9 @@ spec:
     name: in-cluster
     namespace: metallb-system
   source:
-    path: ''
     repoURL: https://metallb.github.io/metallb
     targetRevision: 0.14.9
     chart: metallb
   sources: []
   project: default
-  syncPolicy:
-    syncOptions: []
 
