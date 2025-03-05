@@ -11,6 +11,10 @@ spec:
     repoURL: https://metallb.github.io/metallb
     chart: metallb
     targetRevision: 0.14.9
+    helm:
+      parameters:
+        - name: installCRDs
+          value: 'true'
   destination:
     namespace: metallb-system
     name: in-cluster
