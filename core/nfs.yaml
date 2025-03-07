@@ -7,10 +7,8 @@ spec:
     name: in-cluster
     namespace: kube-system
   source:
-    path: ''
     repoURL: >-
       https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
     targetRevision: v4.10.0
     chart: csi-driver-nfs
-  sources: []
   project: default
