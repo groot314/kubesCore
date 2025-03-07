@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tls
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  source:
+    path: tls
+    repoURL: https://github.com/groot314/kubesCore.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+
