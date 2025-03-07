@@ -1,8 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
   name: nfs
 spec:
   destination:
