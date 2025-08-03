@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-public
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://traefik.github.io/charts
+    chart: traefik
+    targetRevision: 34.4.1
+    helm:
+      parameters:
+        - name: installCRDs
+          value: 'true'
+      values: |-
+        ingressClass:
+          name: traefik-public
+          isDefaultClass: false
+        additionalArguments:
+          - "--ingressClass=traefik-public"
+          - "--ingressClassOnly=true"
+          - "--log.level=INFO"
+        service:
+          type: LoadBalancer
+          spec:
+            loadBalancerIP: 192.168.70.55
+  destination:
+    namespace: traefik-public
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
