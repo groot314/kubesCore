@@ -16,17 +16,55 @@ spec:
         - name: installCRDs
           value: 'true'
       values: |-
-        ingressClass:
-          name: traefik-public
-          isDefaultClass: false
+        globalArguments:
+          - "--global.sendanonymoususage=false"
+          - "--global.checknewversion=false"
         additionalArguments:
-          - "--ingressClass=traefik-public"
-          - "--ingressClassOnly=true"
+          - "--serversTransport.insecureSkipVerify=true"
           - "--log.level=INFO"
+        deployment:
+          enabled: true
+          replicas: 3
+          annotations: {}
+          podAnnotations: {}
+          additionalContainers: []
+          initContainers: []
+        ports:
+          web:
+            redirections:
+              entrypoint:
+                to: websecure
+                priority: 10
+          websecure:
+            http3:
+              enabled: true
+            advertisedPort: 4443
+            tls:
+              enabled: true
+        ingressRoute:
+          dashboard:
+            enabled: false
+        providers:
+          kubernetesCRD:
+            enabled: true
+            ingressClass: traefik-public
+            allowExternalNameServices: true
+          kubernetesIngress:
+            enabled: true
+            allowExternalNameServices: true
+            publishedService:
+              enabled: false
+        rbac:
+          enabled: true
         service:
+          enabled: true
           type: LoadBalancer
+          annotations: {}
+          labels: {}
           spec:
             loadBalancerIP: 192.168.70.55
+          loadBalancerSourceRanges: []
+          externalIPs: []
   destination:
     namespace: traefik-public
     name: in-cluster
