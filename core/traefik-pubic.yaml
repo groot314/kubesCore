@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://traefik.github.io/charts
     chart: traefik
-    targetRevision: 34.4.1
+    targetRevision: 35.4.0
     helm:
       parameters:
         - name: installCRDs
@@ -50,10 +50,7 @@ spec:
             ingressClass: traefik-public
             allowExternalNameServices: true
           kubernetesIngress:
-            enabled: true
-            allowExternalNameServices: true
-            publishedService:
-              enabled: false
+            enabled: false
         rbac:
           enabled: true
         service:
