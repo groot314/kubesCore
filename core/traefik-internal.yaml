@@ -47,7 +47,7 @@ spec:
         ingressClass:  
           enabled: true
           isDefaultClass: true
-          name: "traefik-external"
+          name: "traefik-internal"
         providers:
           kubernetesCRD:
             enabled: true
